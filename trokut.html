@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="CSS/oblikovanja.css">
+    <meta charset="utf-8">
+    <title>Kalkulator Pravokutnog Trokuta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+  </head>
+  <body>
+    <!-- Zaglavlje !-->
+    <div class="zaglavlje">
+        <div class="stupac">
+          <nav id="navigacija">
+            <a href="#pocetna">Početna</a>
+            <a href="#kalkulator">Kalkulator</a>
+            <a href="#podnozje">Podnozje</a>
+          </nav>
+        </div>
+    </div>
+
+    <!-- Pocetna !-->
+    <div class="stranica">
+        <div class="stupac" id="pocetna" style="background-color: white;">
+          <h1>Pravokutni trokut</h1>
+          <p>Pravokutni trokut je trokut koji ima jedan pravi kut. Stranice koje zatvaraju pravi kut nazivaju se katete, a stranica nasuprotna pravom kutu hipotenuza. </p>
+          <div class="box">
+            <div class="kutija">
+              <h2>Pravokutni trokut</h2>
+              <img src="Slike/trokut.svg" alt="">
+            </div>
+            <div class="kutija">
+              <h2>Formule:</h2>
+              \[sin \alpha = \frac{a}{c}\]
+              \[cos \alpha = \frac{b}{c}\]
+              \[tg \alpha = \frac{a}{b}\]
+              \[\alpha + \beta = 90°\]
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Kalkulator !-->
+    <div class="stranica">
+        <div class="stupac" id="kalkulator" style="background-color: white;">
+
+	         <h1>Kalkulator pravokutnog trokuta</h1>
+
+           <div id="navinp">
+          <div id="inp1">
+           <p style="padding-top: 30px; font-weight: bold;">Unesi dva elementa:</p>
+           <p>
+             <input id="broj1" placeholder="Stranica a"><br>
+             <input id="broj2" placeholder="Stranica b"><br>
+             <input id="broj3" placeholder="Stranica c"><br>
+             <input id="kut1" placeholder="Kut alpha"> °<br>
+             <input id="kut2" placeholder="Kut beta"> °<br>
+             <button onclick="funkcijaProvjere()" type="button">Izračunaj</button>
+           </p>
+           </div>
+
+            <div class="drop">
+              <button class="dr">Kutna jedinica</button>
+              <div class="drop-content">
+                  <a href="trokut.html #kalkulator">Stupnjevi</a>
+                  <a href="rad.html #kalkulator">Radijani</a>
+                  <a href="sms.html #kalkulator">° ' ''</a>
+              </div>
+            </div>
+              </div>
+             <table>
+               <tr>
+                 <th>Stranice i kute</th>
+                 <th>Vrijednosti</th>
+               </tr>
+               <tr>
+                 <td>a</td>
+                 <td id="stra"></td>
+                 <td></td>
+                 <td> </td>
+               </tr>
+               <tr>
+                 <td>b</td>
+                 <td id="strb"></td>
+                 <td> </td>
+                 <td> </td>
+               </tr>
+               <tr>
+                 <td>c</td>
+                 <td id="strc"></td>
+                 <td> </td>
+                 <td> </td>
+               </tr>
+               <tr>
+                 <td>alpha</td>
+                 <td id="kuta"></td>
+                 <td id="ra"></td>
+                 <td id="sta"> </td>
+               </tr>
+               <tr>
+                 <td>beta</td>
+                 <td id="kutb"></td>
+                 <td id="rb"> </td>
+                 <td id="stb"> </td>
+               </tr>
+               <tr>
+                 <td>Opseg</td>
+                 <td id="opseg"></td>
+                 <td> </td>
+                 <td> </td>
+               </tr>
+               <tr>
+                 <td>Površina</td>
+                 <td id="povrsina"></td>
+                 <td> </td>
+                 <td> </td>
+               </tr>
+             </table>
+             <p id="ispis">&nbsp;</p>
+<script>
+function funkcijaProvjere() {
+  // uzimanje vrijednosti
+  var a = parseFloat(document.getElementById("broj1").value);
+  var b = parseFloat(document.getElementById("broj2").value);
+  var c = parseFloat(document.getElementById("broj3").value);
+  var alphas = parseFloat(document.getElementById("kut1").value);
+  var betas = parseFloat(document.getElementById("kut2").value);
+  // provjera unosa
+  var stranicaa, stranicab, stranicac, ka, kb, o, p, rada, radb, d, m, s, db, dm, ds;
+  let text="Unos je dobar";
+  var slucaj,alpha, beta, bstupnjevi, bminute, bsekunde;
+  if (isNaN(a)==false && isNaN(b)==false && isNaN(c)==true && isNaN(alphas)==true && isNaN(betas)==true)
+    slucaj=1;
+  if (isNaN(a)==false && isNaN(b)==true && isNaN(c)==false && isNaN(alphas)==true && isNaN(betas)==true)
+    slucaj=2;
+  if (isNaN(a)==true && isNaN(b)==false && isNaN(c)==false && isNaN(alphas)==true && isNaN(betas)==true)
+    slucaj=3;
+  if (isNaN(a)==true && isNaN(b)==true && isNaN(c)==false && isNaN(alphas)==false && isNaN(betas)==true)
+    slucaj=4;
+  if (isNaN(a)==true && isNaN(b)==true && isNaN(c)==false && isNaN(alphas)==true && isNaN(betas)==false)
+    slucaj=5;
+  if (isNaN(a)==false && isNaN(b)==true && isNaN(c)==true && isNaN(alphas)==false && isNaN(betas)==true)
+    slucaj=6;
+  if (isNaN(a)==false && isNaN(b)==true && isNaN(c)==true && isNaN(alphas)==true && isNaN(betas)==false)
+    slucaj=7;
+  if (isNaN(a)==true && isNaN(b)==false && isNaN(c)==true && isNaN(alphas)==false && isNaN(betas)==true)
+    slucaj=8;
+  if (isNaN(a)==true && isNaN(b)==false && isNaN(c)==true && isNaN(alphas)==true && isNaN(betas)==false)
+    slucaj=9;
+
+  switch(slucaj){
+      case 1: c=Math.sqrt(a*a+b*b);
+      		  alpha=Math.asin(a/c);
+      		  alphas=alpha*180/Math.PI;
+     		    beta=Math.acos(a/c);
+      		  betas=beta*180/Math.PI;
+            stranicaa=a.toFixed(2);
+            stranicab=b.toFixed(2);
+            stranicac=c.toFixed(2);
+            ka=alphas.toFixed(2)+"°";
+            kb=betas.toFixed(2)+"°";
+            o=a+b+c;
+            o=o.toFixed(2);
+            p=(a*b)/2;
+            p=p.toFixed(2);
+            rada=alphas*Math.PI/180;
+            radb=betas*Math.PI/180;
+            d=Math.trunc(alphas);
+            m=Math.trunc(Math.abs(alphas-d)*60);
+            s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+            db=Math.trunc(betas);
+            mb=Math.trunc(Math.abs(betas-db)*60);
+            sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+
+      break;
+      case 2:   if(c>a)
+      {b=Math.sqrt(c*c-a*a);
+            alpha=Math.asin(a/c);
+      		  alphas=alpha*180/Math.PI;
+     		    beta=Math.acos(a/c);
+      		  betas=beta*180/Math.PI;
+            stranicaa=a.toFixed(2);
+            stranicab=b.toFixed(2);
+            stranicac=c.toFixed(2);
+            ka=alphas.toFixed(2)+"°";
+            kb=betas.toFixed(2)+"°";
+            o=a+b+c;
+            o=o.toFixed(2);
+            p=(a*b)/2;
+            p=p.toFixed(2);
+            rada=alphas*Math.PI/180;
+            radb=betas*Math.PI/180;
+            d=Math.trunc(alphas);
+            m=Math.trunc(Math.abs(alphas-d)*60);
+            s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+            db=Math.trunc(betas);
+            mb=Math.trunc(Math.abs(betas-db)*60);
+            sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+          }
+      else
+       text="Hipotenuza ne može biti kraća od katete!" ;
+
+      break;
+      case 3: 	if(c>b){
+      			a=Math.sqrt(c*c-b*b);
+            alpha=Math.asin(a/c);
+      		  alphas=alpha*180/Math.PI;
+     		    beta=Math.acos(a/c);
+      		  betas=beta*180/Math.PI;
+            stranicaa=a.toFixed(2);
+            stranicab=b.toFixed(2);
+            stranicac=c.toFixed(2);
+            ka=alphas.toFixed(2)+"°";
+            kb=betas.toFixed(2)+"°";
+            o=a+b+c;
+            o=o.toFixed(2);
+            p=(a*b)/2;
+            p=p.toFixed(2);
+            rada=alphas*Math.PI/180;
+            radb=betas*Math.PI/180;
+            d=Math.trunc(alphas);
+            m=Math.trunc(Math.abs(alphas-d)*60);
+            s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+            db=Math.trunc(betas);
+            mb=Math.trunc(Math.abs(betas-db)*60);
+            sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+          }
+      			else{
+                text="Hipotenuza ne može biti kraća od katete!" ;}
+      break;
+
+    case 4: if(alphas>0&&alphas<90){
+            alpha=alphas*Math.PI/180;
+            a=Math.sin(alpha)*c;
+            b=Math.cos(alpha)*c;
+     		    beta=Math.acos(a/c);
+      		  betas=beta*180/Math.PI;
+            stranicaa=a.toFixed(2);
+            stranicab=b.toFixed(2);
+            stranicac=c.toFixed(2);
+            ka=alphas.toFixed(2)+"°";
+            kb=betas.toFixed(2)+"°";
+            o=a+b+c;
+            o=o.toFixed(2);
+            p=(a*b)/2;
+            p=p.toFixed(2);
+            rada=alpha;
+            radb=betas*Math.PI/180;
+            d=Math.trunc(alphas);
+            m=Math.trunc(Math.abs(alphas-d)*60);
+            s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+            db=Math.trunc(betas);
+            mb=Math.trunc(Math.abs(betas-db)*60);
+            sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+          }
+      else
+        text="Kut ne može biti negativan ili veći od 90°"
+      break;
+
+      case 5: if(betas>0&&betas<90){
+        beta=betas*Math.PI/180;
+        a=Math.cos(beta)*c;
+        b=Math.sin(beta)*c;
+        alphas=90-betas;
+        stranicaa=a.toFixed(2);
+        stranicab=b.toFixed(2);
+        stranicac=c.toFixed(2);
+        ka=alphas.toFixed(2)+"°";
+        kb=betas.toFixed(2)+"°";
+        o=a+b+c;
+        o=o.toFixed(2);
+        p=(a*b)/2;
+        p=p.toFixed(2);
+        rada=alphas*Math.PI/180;
+        radb=betas*Math.PI/180;
+        d=Math.trunc(alphas);
+        m=Math.trunc(Math.abs(alphas-d)*60);
+        s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+        db=Math.trunc(betas);
+        mb=Math.trunc(Math.abs(betas-db)*60);
+        sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+      }
+        else
+          text="Kut ne može biti negativan ili veći od 90°"
+        break;
+
+        case 6: if(alphas>0&&alphas<90){
+          alpha=alphas*Math.PI/180;
+          b=a/Math.tan(alpha);
+          c=Math.sqrt(a*a+b*b);
+          beta=Math.acos(a/c);
+          betas=beta*180/Math.PI;;
+          stranicaa=a.toFixed(2);
+          stranicab=b.toFixed(2);
+          stranicac=c.toFixed(2);
+          ka=alphas.toFixed(2)+"°";
+          kb=betas.toFixed(2)+"°";
+          o=a+b+c;
+          o=o.toFixed(2);
+          p=(a*b)/2;
+          p=p.toFixed(2);
+          rada=alphas*Math.PI/180;
+          radb=betas*Math.PI/180;
+          d=Math.trunc(alphas);
+          m=Math.trunc(Math.abs(alphas-d)*60);
+          s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+          db=Math.trunc(betas);
+          mb=Math.trunc(Math.abs(betas-db)*60);
+          sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+        }
+          else
+            text="Kut ne može biti negativan ili veći od 90°"
+          break;
+
+          case 7: if(betas>0&&betas<90){
+            beta=betas*Math.PI/180;
+            b=Math.tan(beta)*a;
+            c=Math.sqrt(b*b+a*a);
+            alphas=90-betas;
+            stranicaa=a.toFixed(2);
+            stranicab=b.toFixed(2);
+            stranicac=c.toFixed(2);
+            ka=alphas.toFixed(2)+"°";
+            kb=betas.toFixed(2)+"°";
+            o=a+b+c;
+            o=o.toFixed(2);
+            p=(a*b)/2;
+            p=p.toFixed(2);
+            rada=alphas*Math.PI/180;
+            radb=betas*Math.PI/180;
+            d=Math.trunc(alphas);
+            m=Math.trunc(Math.abs(alphas-d)*60);
+            s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+            db=Math.trunc(betas);
+            mb=Math.trunc(Math.abs(betas-db)*60);
+            sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+          }
+            else
+              text="Kut ne može biti negativan ili veći od 90°"
+            break;
+
+            case 8: if(alphas>0&&alphas<90){
+              alpha=alphas*Math.PI/180;
+              a=b*Math.tan(alpha);
+              c=Math.sqrt(b*b+a*a);
+              beta=Math.acos(a/c);
+        		  betas=beta*180/Math.PI;
+              stranicaa=a.toFixed(2);
+              stranicab=b.toFixed(2);
+              stranicac=c.toFixed(2);
+              ka=alphas.toFixed(2)+"°";
+              kb=betas.toFixed(2)+"°";
+              o=a+b+c;
+              o=o.toFixed(2);
+              p=(a*b)/2;
+              p=p.toFixed(2);
+              rada=alphas*Math.PI/180;
+              radb=betas*Math.PI/180;
+              d=Math.trunc(alphas);
+              m=Math.trunc(Math.abs(alphas-d)*60);
+              s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+              db=Math.trunc(betas);
+              mb=Math.trunc(Math.abs(betas-db)*60);
+              sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+            }
+              else
+                text="Kut ne može biti negativan ili veći od 90°"
+              break;
+
+              case 9: if(betas>0&&betas<90){
+                beta=betas*Math.PI/180;
+                a=b/Math.tan(beta);
+                c=Math.sqrt(b*b+a*a);
+                alphas=90-betas;
+                stranicaa=a.toFixed(2);
+                stranicab=b.toFixed(2);
+                stranicac=c.toFixed(2);
+                ka=alphas.toFixed(2)+"°";
+                kb=betas.toFixed(2)+"°";
+                o=a+b+c;
+                o=o.toFixed(2);
+                p=(a*b)/2;
+                p=p.toFixed(2);
+                rada=alphas*Math.PI/180;
+                radb=betas*Math.PI/180;
+                d=Math.trunc(alphas);
+                m=Math.trunc(Math.abs(alphas-d)*60);
+                s=Math.trunc(Math.abs(alphas-d-m/60)*3600);
+                db=Math.trunc(betas);
+                mb=Math.trunc(Math.abs(betas-db)*60);
+                sb=Math.round(Math.abs(betas-db-mb/60)*3600);
+              }
+                else
+                  text="Kut ne može biti negativan ili veći od 90°"
+                break;
+    default: text="Unos nije valjan";
+
+  }
+  document.getElementById("stra").innerHTML = stranicaa;
+  document.getElementById("strb").innerHTML = stranicab;
+  document.getElementById("strc").innerHTML = stranicac;
+  document.getElementById("kuta").innerHTML = ka;
+  document.getElementById("kutb").innerHTML = kb;
+  document.getElementById("ispis").innerHTML = text;
+  document.getElementById("opseg").innerHTML = o;
+  document.getElementById("povrsina").innerHTML = p;
+  document.getElementById("ra").innerHTML = rada.toFixed(4);
+  document.getElementById("rb").innerHTML = radb.toFixed(4);
+  document.getElementById("sta").innerHTML = d+"° "+m+"' "+s+"''";
+  document.getElementById("stb").innerHTML = db+"° "+mb+"' "+sb+"''";
+  }
+  </script>
+  </div>
+	</div>
+    <!-- Podnozje !-->
+    <div class="podnozje">
+        <div class="stupac" id="podnozje">
+          <h3>Tehnička škola Kutina</h3>
+          <h3>Dominik Marenic</h3>
+          <h3>4.F</h3>
+        </div>
+    </div>
+  </body>
+</html>
